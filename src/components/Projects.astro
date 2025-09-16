@@ -1,46 +1,23 @@
 ---
-import GitHub from "./icons/GitHub.astro";
-import NextJS from "./icons/NextJS.astro";
-import Tailwind from "./icons/Tailwind.astro";
-import Link from "./icons/Link.astro";
-import LinkButton from "./LinkButton.astro";
-
-const TAGS = {
-  NEXT: {
-    name: "Next.js",
-    class: "bg-black text-white",
-    icon: NextJS,
-  },
-  TAILWIND: {
-    name: "Tailwind CSS",
-    class: "bg-[#003159] text-white",
-    icon: Tailwind,
-  },
-};
 const PROJECTS = [
   {
-    title: "SVGL - A beautiful library with SVG logos",
+    title: "Renderers e Isométrías",
     description:
-      "Biblioteca de logos SVG de las marcas más populares. +10k visitas al mes. +2K svgs descargados. Creado desde cero con Next.js, React y Tailwind CSS.",
-    link: "",
-    github: "",
-    image: "/projects/svgl.webp",
-    tags: [],
+      "Animación 3D, render y video. Lleva tus ideas a otro nivel con visualizaciones impactantes: imágenes, videos y animaciones 3D que dan vida a tus proyectos.",
+    image: "/projects/renderseisometrias.jpg",
   },
   {
-    title: "AdventJS - Retos de programación con JavaScript y TypeScript",
+    title: "Planimetría en general",
     description:
-      "Plataforma gratuita con retos de programación. Más de 1 millón de visitas en un mes. +50K retos completados. Creada desde cero con Next.js, React y Tailwind CSS.",
-    link: "",
-    image: "/projects/adventjs.webp",
-    tags: [],
+      "Digitalización de planos de arquitectura, estructuras e instalaciones en 2D y 3D con Autocad, Revit y Archicad. Diseños completos para viviendas y todo tipo de inmuebles: desde obras nuevas y proyectos menores, hasta trámites municipales, regularizaciones y gestiones con entes públicos. Precisión y calidad en cada lámina.",
+    image: "/projects/planimetria.jpg",
   },
 ];
 ---
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, title, description, tags, link, github }) => (
+    PROJECTS.map(({ image, title, description }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
           <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
@@ -63,7 +40,7 @@ const PROJECTS = [
             <div class="mt-2 text-gray-700 dark:text-gray-400">
               {description}
             </div>
-            <footer class="flex items-end justify-start mt-4 gap-x-4"></footer>
+            <footer class="flex items-end justify-start mt-4 gap-x-4" />
           </div>
         </div>
       </article>
