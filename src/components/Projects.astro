@@ -14,64 +14,61 @@ const PROJECTS = [
       "/projects/render/render6.jpg",
       "/projects/render/render7.jpg",
       "/projects/render/render8.jpg",
-      "/projects/render/render9.jpg"
+      "/projects/render/render9.jpg",
     ],
   },
   {
     title: "Planimetría en general",
     description:
       "Digitalización de planos de arquitectura, estructuras e instalaciones en 2D y 3D con Autocad, Revit y Archicad. Diseños completos para viviendas y todo tipo de inmuebles: desde obras nuevas y proyectos menores, hasta trámites municipales, regularizaciones y gestiones con entes públicos. Precisión y calidad en cada lámina.",
-    image: "/projects/planimetria.jpg",
+        images: [
+      "/projects/planimetria/planimetria0.jpg",
+      "/projects/planimetria/planimetria1.jpg",
+      "/projects/planimetria/planimetria2.jpg",
+    ],
   },
 ];
 ---
 
 <div class="flex flex-col gap-y-16">
   {
-    PROJECTS.map(({ image, images, title, description }) => (
+    PROJECTS.map(({ images, title, description }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
         <div class="w-full md:w-1/2">
           <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
-            {images ? (
-              <div class="relative w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105 overflow-hidden rounded-xl">
-                <div class="absolute inset-0 transition-opacity duration-500 ease-in-out" id="render-slider">
-                  {images.map((src, index) => (
-                    <img
-                      src={src}
-                      alt={`${title} - Imagen ${index + 1}`}
-                      class="absolute inset-0 w-full h-full object-cover object-top opacity-0"
-                      loading={index === 0 ? "eager" : "lazy"}
-                      style={{ opacity: index === 0 ? 1 : 0 }}
-                    />
-                  ))}
-                </div>
-                <script>
-                  (function() {
-                    const slider = document.getElementById("render-slider");
-                    if (!slider) return;
-                    const imgs = Array.from(slider.children) as HTMLImageElement[];
-                    let current = 0;
-                    const total = imgs.length;
+            <div class="relative w-full aspect-video">
+              {images.map((src, index) => (
+                <img
+                  src={src}
+                  alt={title}
+                  class={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-in-out ${index === 0 ? "opacity-100" : "opacity-0"}`}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  data-slide-id={title}
+                  data-slide-index={index}
+                />
+              ))}
+            </div>
+            <script define:vars={{ imageCount: images.length, title }}>
+              (function() {
+                const slides = document.querySelectorAll(`[data-slide-id="${title}"]`);
+                if (!slides.length) return;
+                
+                let current = 0;
+                const total = imageCount;
 
-                    function next() {
-                      imgs[current].style.opacity = '0';
-                      current = (current + 1) % total;
-                      imgs[current].style.opacity = '1';
-                    }
+                function changeImage() {
+                  slides[current].classList.remove('opacity-100');
+                  slides[current].classList.add('opacity-0');
+                  
+                  current = (current + 1) % total;
+                  
+                  slides[current].classList.remove('opacity-0');
+                  slides[current].classList.add('opacity-100');
+                }
 
-                    // Timer to change image
-                    setInterval(next, 3000);
-                  })();
-                </script>
-              </div>
-            ) : (
-              <img
-                alt={title}
-                class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
-                loading="lazy"
-                src={image}
-              />
-            )}
+                setInterval(changeImage, 4000);
+              })();
+            </script>
           </div>
         </div>
 
